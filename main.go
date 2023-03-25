@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"os"
 )
 
 func ReverseProxyAPIGet(w http.ResponseWriter, r *http.Request) {
@@ -136,5 +137,11 @@ func main() {
 	http.HandleFunc("/api/get", withCORS(ReverseProxyAPIGet))
 	http.HandleFunc("/api/login", withCORS(ReverseProxyAPILogin))
 	http.HandleFunc("/api/post", withCORS(ReverseProxyAPIPost))
-	http.ListenAndServe(":8080", nil)
+
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "7660"
+	}
+
+	http.ListenAndServe(":"+port, nil)
 }
