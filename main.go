@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io"
 	"net/http"
 )
@@ -129,6 +130,9 @@ func withCORS(h http.HandlerFunc) http.HandlerFunc {
 }
 
 func main() {
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprint(w, "<h1>New Kuleanpay Proxy api built with go. Super-fast ⚡</h1>")
+	})
 	http.HandleFunc("/api/get", withCORS(ReverseProxyAPIGet))
 	http.HandleFunc("/api/login", withCORS(ReverseProxyAPILogin))
 	http.HandleFunc("/api/post", withCORS(ReverseProxyAPIPost))
