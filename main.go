@@ -3,8 +3,6 @@ package main
 import (
 	"io"
 	"net/http"
-
-	"github.com/Toheeb-Ojuolape/kuleanpay-go-proxy/controllers"
 )
 
 func ReverseProxyAPIGet(w http.ResponseWriter, r *http.Request) {
@@ -131,8 +129,8 @@ func withCORS(h http.HandlerFunc) http.HandlerFunc {
 }
 
 func main() {
-	http.HandleFunc("/api/get", withCORS(controllers.ReverseProxyAPIGet))
-	http.HandleFunc("/api/login", withCORS(controllers.ReverseProxyAPILogin))
-	http.HandleFunc("/api/post", withCORS(controllers.ReverseProxyAPIPost))
+	http.HandleFunc("/api/get", withCORS(ReverseProxyAPIGet))
+	http.HandleFunc("/api/login", withCORS(ReverseProxyAPILogin))
+	http.HandleFunc("/api/post", withCORS(ReverseProxyAPIPost))
 	http.ListenAndServe(":8080", nil)
 }
