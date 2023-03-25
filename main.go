@@ -16,9 +16,9 @@ func ReverseProxyAPIGet(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("Content-Type", r.Header.Get("Content-Type"))
 	req.Header.Set("Authorization", r.Header.Get("Authorization"))
-	req.Header.Set("Channel", "Web")
+	req.Header.Set("Channel", r.Header.Get("Channel"))
 
 	resp, err := client.Do(req)
 
@@ -54,7 +54,7 @@ func ReverseProxyAPILogin(w http.ResponseWriter, r *http.Request) {
 	}
 
 	req.Header.Set("Content-Type", r.Header.Get("Content-Type"))
-	req.Header.Set("Authorization", r.Header.Get("Channel"))
+	req.Header.Set("Channel", r.Header.Get("Channel"))
 
 	resp, err := client.Do(req)
 
@@ -90,7 +90,7 @@ func ReverseProxyAPIPost(w http.ResponseWriter, r *http.Request) {
 
 	req.Header.Set("Content-Type", r.Header.Get("Content-Type"))
 	req.Header.Set("Authorization", r.Header.Get("Authorization"))
-	req.Header.Set("Authorization", r.Header.Get("Channel"))
+	req.Header.Set("Channel", r.Header.Get("Channel"))
 
 	resp, err := client.Do(req)
 
